@@ -13103,7 +13103,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Gaussian-processes:-Session-1">Gaussian processes: Session 1<a class="anchor-link" href="#Gaussian-processes:-Session-1">¶</a></h1><h2 id="Exercise-8.1:-Sample-from-GP-prior">Exercise 8.1: Sample from GP prior<a class="anchor-link" href="#Exercise-8.1:-Sample-from-GP-prior">¶</a></h2><p>In this exercises we will write the code needed to draw and plot samples of $f$ from a Gaussian process prior with squared exponential (or, equivalently, RBF) kernel</p>
+<h1 id="Gaussian-Processes:-Part-1">Gaussian Processes: Part 1<a class="anchor-link" href="#Gaussian-Processes:-Part-1">¶</a></h1><h2 id="Exercise-8.1:-Sample-from-GP-prior">Exercise 8.1: Sample from GP prior<a class="anchor-link" href="#Exercise-8.1:-Sample-from-GP-prior">¶</a></h2><p>In this exercises we will write the code needed to draw and plot samples of $f$ from a Gaussian process prior with squared exponential (or, equivalently, RBF) kernel</p>
 $$
 f \sim \mathcal{GP}(m, \kappa), \qquad m(x) = 0 \text{ and } \kappa(x, x') = \sigma^2_f \exp{\Big(−\frac{1}{2l^2} {\|x - x'\|}^2\Big)}.
 $$<p>To implement this, we choose a vector of $m$ test input points $\mathbf{x}_*$.
@@ -13501,9 +13501,9 @@ What is the connection between the credibility regions and the samples you drew 
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/tmp/ipykernel_16162/2193942380.py:6: RuntimeWarning: invalid value encountered in sqrt
+<pre>/tmp/ipykernel_21206/2193942380.py:6: RuntimeWarning: invalid value encountered in sqrt
   mu_post + i*np.sqrt(np.diag(K_post)),
-/tmp/ipykernel_16162/2193942380.py:7: RuntimeWarning: invalid value encountered in sqrt
+/tmp/ipykernel_21206/2193942380.py:7: RuntimeWarning: invalid value encountered in sqrt
   mu_post - i*np.sqrt(np.diag(K_post)),
 </pre>
 </div>
