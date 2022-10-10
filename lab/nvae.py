@@ -76,7 +76,7 @@ def save_response_content(response, destination, chunk_size=32768):
 def download_gdrive(id, destination):
   url = "https://drive.google.com/u/0/uc?export=download"
   session = requests.Session()
-  response = session.get(url, params = { 'id' : id }, stream = True)
+  response = session.get(url, params = { 'id' : id, 'confirm' : 1 }, stream = True)
   token = get_confirm_token(response)
   if token:
     params = { 'id' : id, 'confirm' : token }
