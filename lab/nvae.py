@@ -1136,6 +1136,7 @@ class AutoEncoder(nn.Module):
 
         return enc_sampler, dec_sampler, nf_cells, enc_kv, dec_kv, query
 
+    
     def init_decoder_tower(self, mult):
         # create decoder tower
         dec_tower = nn.ModuleList()
