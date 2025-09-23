@@ -13110,7 +13110,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Exercise-11.1:-PCA-on-MNIST">Exercise 11.1: PCA on MNIST<a class="anchor-link" href="#Exercise-11.1:-PCA-on-MNIST">¶</a></h2><p>In the lectures the principal component analysis (PCA) was introduced as a method for dimensionality reduction and feature extraction, i.e., to condense data by mapping it to a lower dimensional space of the most important features.</p>
+<h2 id="Exercise-8.1:-PCA-on-MNIST">Exercise 8.1: PCA on MNIST<a class="anchor-link" href="#Exercise-8.1:-PCA-on-MNIST">¶</a></h2><p>In the lectures the principal component analysis (PCA) was introduced as a method for dimensionality reduction and feature extraction, i.e., to condense data by mapping it to a lower dimensional space of the most important features.</p>
 
 </div>
 </div>
@@ -13663,7 +13663,7 @@ of the images $\mathbf{x}_i \in {[0,1]}^{784}$ and their reconstructions $\tilde
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Exercise-11.2---Derivations-for-probabilistic-PCA">Exercise 11.2 - Derivations for probabilistic PCA<a class="anchor-link" href="#Exercise-11.2---Derivations-for-probabilistic-PCA">¶</a></h2><p>In constrast to (regular) PCA, the so-called probabilistic PCA (PPCA) allows a probabilistic interpretation of the principal components. The probabilistic formulation of PCA also allows us to extend the method and alter its underlying assumptions quite easily.</p>
+<h2 id="Exercise-8.2---Derivations-for-probabilistic-PCA">Exercise 8.2 - Derivations for probabilistic PCA<a class="anchor-link" href="#Exercise-8.2---Derivations-for-probabilistic-PCA">¶</a></h2><p>In constrast to (regular) PCA, the so-called probabilistic PCA (PPCA) allows a probabilistic interpretation of the principal components. The probabilistic formulation of PCA also allows us to extend the method and alter its underlying assumptions quite easily.</p>
 <p>As in exercise 11.1, let $\mathbf{x} \in \mathbb{R}^D$ represent a data sample that we
 want to decode from a lower dimensional representation
 $\mathbf{z} \in \mathbb{R}^M$ with $M &lt; D$. The PPCA model assumes that
@@ -13726,7 +13726,7 @@ where $\mathbf{M} = \mathbf{W}^\mathsf{T} \mathbf{W} + \sigma^2 \mathbf{I}_M$.</
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Exercise-11.3:-Gaussian-Mixture-Model">Exercise 11.3: Gaussian Mixture Model<a class="anchor-link" href="#Exercise-11.3:-Gaussian-Mixture-Model">¶</a></h2><p>In this exercise we estimate the parameters of a Gaussian mixture model with the expectation-maximization (EM) algorithm.</p>
+<h2 id="Exercise-8.3:-Gaussian-Mixture-Model">Exercise 8.3: Gaussian Mixture Model<a class="anchor-link" href="#Exercise-8.3:-Gaussian-Mixture-Model">¶</a></h2><p>In this exercise we estimate the parameters of a Gaussian mixture model with the expectation-maximization (EM) algorithm.</p>
 <p>A Gaussian mixture model with $m \geq 1$ components consists of $m$ mixture components $\mathcal{N}(\mu_1, \Sigma_1), \ldots, \mathcal{N}(\mu_m, \Sigma_m)$ and corresponding non-negative mixture weights $w_1, \ldots, w_m$ with $\sum_{i=1}^m w_i = 1$. It has the probability density function
 \begin{equation*}
     \operatorname{GMM}(x; w_1, \mu_1, \Sigma_1, \ldots, w_m, \mu_m, \Sigma_m) = \sum_{i=1}^m w_i \mathcal{N}(x; \mu_i, \Sigma_i).
