@@ -21,6 +21,7 @@ import torch.nn.functional as F
 import torch.linalg as LA
 
 import requests
+import gdown
 
 from torch.distributions.normal import Normal
 from torch.distributions.bernoulli import Bernoulli
@@ -103,35 +104,39 @@ def get_statedict(checkpoint):
         )
     )
 
-def load_pretrained_model(name):
-  filename = "checkpoint_{}.pt".format(name)
-  # load saved checkpoint of model
-  try:
-    data = torch.load(filename, map_location='cpu')
-  except FileNotFoundError:
-    print("downloading checkpoint of pretrained model for", name, "...")
-    id = PRETRAINED_MODELS[name]
-    download_gdrive(PRETRAINED_MODELS[name], filename)
-    data = torch.load(filename, map_location='cpu')
+def load_pretrained_model(name, use_gdown: bool = False):
+    filename = "checkpoint_{}.pt".format(name)
+    # load saved checkpoint of model
+    try:
+        data = torch.load(filename, map_location='cpu', weights_only=False)
+    except FileNotFoundError:
+        print("downloading checkpoint of pretrained model for", name, "...")
+        id = PRETRAINED_MODELS[name]
+        if use_gdown:
+            url = f"https://drive.google.com/uc?id={id}"
+            gdown.download(url, filename, quiet=False)
+        else:
+            download_gdrive(PRETRAINED_MODELS[name], filename)
+        data = torch.load(filename, map_location='cpu', weights_only=False)
 
-  # extract arguments and states
-  args = get_args(data)
-  states = get_statedict(data)
+    # extract arguments and states
+    args = get_args(data)
+    states = get_statedict(data)
 
-  # rebuild model
-  arch_instance = get_arch_cells(args.arch_instance)
-  model = AutoEncoder(args, arch_instance)
-  model.load_state_dict(states)
-  model.eval()
+    # rebuild model
+    arch_instance = get_arch_cells(args.arch_instance)
+    model = AutoEncoder(args, arch_instance)
+    model.load_state_dict(states)
+    model.eval()
 
-  # disable running statistics of BatchNorm2D - maybe it improves performance?
-  # # https://discuss.pytorch.org/t/performance-highly-degraded-when-eval-is-activated-in-the-test-phase/3323/57
-  for m in model.modules():
-      for child in m.children():
-          if type(child) == nn.BatchNorm2d:
-            child.track_running_stats = False
+    # disable running statistics of BatchNorm2D - maybe it improves performance?
+    # # https://discuss.pytorch.org/t/performance-highly-degraded-when-eval-is-activated-in-the-test-phase/3323/57
+    for m in model.modules():
+        for child in m.children():
+            if type(child) == nn.BatchNorm2d:
+                child.track_running_stats = False
 
-  return model
+    return model
 
 ## The following lines are copied from utils.py
 
