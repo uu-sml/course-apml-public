@@ -13150,7 +13150,7 @@ $$
 <span class="n">data</span> <span class="o">=</span> <span class="n">spio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="s2">"lindata.mat"</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"X"</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="c1"># inputs</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Y"</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="c1"># outputs</span>
-<span class="n">beta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"sigma"</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># measurement noise precision</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"sigma"</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># measurement noise precision</span>
 <span class="n">N</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span>
 
 <span class="c1"># Define the feature vector</span>
@@ -13172,18 +13172,6 @@ $$
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/var/folders/y_/88r79h6j7f94m1tjt4rr9g2c0000gn/T/ipykernel_44053/1930372805.py:7: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
-  beta = float(data["sigma"])**(-2) # measurement noise precision
-</pre>
-</div>
-</div>
 
 <div class="output_area">
 
@@ -13461,7 +13449,7 @@ Do you think the model performs well on this data?</p>
 <span class="n">data</span> <span class="o">=</span> <span class="n">spio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="s2">"nlindata.mat"</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"X"</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="c1"># inputs</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Y"</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="c1"># outputs</span>
-<span class="n">beta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"sigma"</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># measurement noise precision</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"sigma"</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># measurement noise precision</span>
 <span class="n">N</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span>
 
 <span class="c1"># Plot the features</span>
@@ -13480,18 +13468,6 @@ Do you think the model performs well on this data?</p>
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/var/folders/y_/88r79h6j7f94m1tjt4rr9g2c0000gn/T/ipykernel_44053/2817266732.py:7: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
-  beta = float(data["sigma"])**(-2) # measurement noise precision
-</pre>
-</div>
-</div>
 
 <div class="output_area">
 
@@ -14197,7 +14173,7 @@ Which one of the three feature vectors in Exercise 3.2 gives the largest log mar
 <span class="n">data</span> <span class="o">=</span> <span class="n">spio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="s2">"nlindata.mat"</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"X"</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="c1"># inputs</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Y"</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="c1"># outputs</span>
-<span class="n">beta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"sigma"</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># measurement noise precision</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"sigma"</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># measurement noise precision</span>
 
 <span class="c1"># Feature vector and prior used in 3.2 (a)</span>
 <span class="k">def</span> <span class="nf">Phi</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>  <span class="c1"># Phi(a) = [1, a]</span>
@@ -14254,18 +14230,6 @@ Piecewise linear (3.2 (d)):	   -87.1
 </div>
 </div>
 
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/var/folders/y_/88r79h6j7f94m1tjt4rr9g2c0000gn/T/ipykernel_44053/2759042544.py:7: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
-  beta = float(data["sigma"])**(-2) # measurement noise precision
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -14308,7 +14272,7 @@ Hence we see that the marginal likelihood also penalizes model complexity.</p>
 <span class="n">data</span> <span class="o">=</span> <span class="n">spio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="s2">"lindata.mat"</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"X"</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="c1"># inputs</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Y"</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="c1"># outputs</span>
-<span class="n">beta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"sigma"</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># measurement noise precision</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"sigma"</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># measurement noise precision</span>
 
 <span class="c1"># Feature vector and prior used in 3.2 (a)</span>
 <span class="k">def</span> <span class="nf">Phi</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>  <span class="c1"># Phi(a) = [1, a]</span>
@@ -14361,18 +14325,6 @@ Hence we see that the marginal likelihood also penalizes model complexity.</p>
 Quadratic (3.2 (b)):		   -61.1
 Step function (3.2 (c)):	   -71.1
 Piecewise linear (3.2 (d)):	   -62.5
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/var/folders/y_/88r79h6j7f94m1tjt4rr9g2c0000gn/T/ipykernel_44053/2955605229.py:7: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
-  beta = float(data["sigma"])**(-2) # measurement noise precision
 </pre>
 </div>
 </div>
