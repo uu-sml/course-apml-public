@@ -13101,12 +13101,12 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Bayesian-linear-regression">Bayesian linear regression<a class="anchor-link" href="#Bayesian-linear-regression">¶</a></h1><p>In this exercise session we consider the supervised regression problem of finding a function $f(x)$ that describes the relationship between a scalar input $x$ and a scalar output $y$:</p>
+<h1 id="Bayesian-linear-regression">Bayesian linear regression<a class="anchor-link" href="#Bayesian-linear-regression">¶</a></h1><p>In this exercise session, we consider the supervised regression problem of finding a function $f(x)$ that describes the relationship between a scalar input $x$ and a scalar output $y$:</p>
 $$
 y = f(x) + \epsilon, \qquad \epsilon \sim \mathcal{N}(0, \beta^{-1}).
 $$<p>We model this with a Bayesian linear regression model</p>
 $$
-f(x) = \boldsymbol{\phi}(x)^{\mathsf{T}} \mathbf{w}, \qquad \mathbf{w} \sim \mathcal{N}(\boldsymbol{\mu}_0, \mathbf{S}_0),
+f(x) = \boldsymbol{\phi}(x)^{\mathsf{T}} \mathbf{w}, \qquad \mathbf{w} \sim \mathcal{N}(\mathbf{m}_0, \mathbf{S}_0),
 $$<p>where $\boldsymbol{\phi}(x)$ is a vector of the input features.
 Note that we used the notation $\mathbf{x}$ for the input features in the lecture.
 We changed this notation to $\boldsymbol{\phi}(x)$ here in order to not mix it up with the scalar input $x$.</p>
@@ -13121,8 +13121,8 @@ $$
 \boldsymbol{\Phi} = \begin{bmatrix} \boldsymbol{\phi}(x_1)^{\mathsf{T}} \\ \vdots \\ \boldsymbol{\phi}(x_N)^{\mathsf{T}} \end{bmatrix}
 \qquad \text{and} \qquad
 \mathbf{y} = \begin{bmatrix} y_1 \\ \vdots \\ y_N \end{bmatrix}.
-$$<p>Given a set of training data of inputs and outputs $\mathcal{D} = \{(x_i, y_i)\}_{i=1}^N$, we are interested in finding the posterior of the weights $p(\mathbf{w} \,|\, \mathbf{y})$ and also the predictive distribution $p(f(x_{\star}) \,|\, \mathbf{y})$ of unseen input $x_{\star}$.
-For further information about the Bayesian linear regression model see Lecture 3 and/or Christopher Bishop's book <a href="https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/">"Pattern recognition and machine learning"</a>.</p>
+$$<p>Given a set of training data of inputs and outputs $\mathcal{D} = \{(x_i, y_i)\}_{i=1}^N$, we are interested in finding the posterior of the weights $p(\mathbf{w} \,|\, \mathbf{y})$ and also the predictive distribution $p(f(x_{\star}) \,|\, \mathbf{y})$ of an unseen input $x_{\star}$.
+For further information about the Bayesian linear regression model, see Lecture 3 and/or Christopher Bishop's book <a href="https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/">"Pattern recognition and machine learning"</a>.</p>
 
 </div>
 </div>
@@ -13132,7 +13132,7 @@ For further information about the Bayesian linear regression model see Lecture 3
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Exercise-3.1:-Understanding-the-code">Exercise 3.1: Understanding the code<a class="anchor-link" href="#Exercise-3.1:-Understanding-the-code">¶</a></h2><p>Download the files <a download="lindata.mat" href="https://uni-tuebingen.de/fileadmin/Uni_Tuebingen/Fakultaeten/MatNat/Fachbereiche/Informatik/Lehrstuehle/MethMaschLern/Probabilistic_ML/Notebook_Vorlesung_7___9/lindata.mat">`lindata.mat`</a> and <a download="nlindata.mat" href="https://uni-tuebingen.de/fileadmin/Uni_Tuebingen/Fakultaeten/MatNat/Fachbereiche/Informatik/Lehrstuehle/MethMaschLern/Probabilistic_ML/Notebook_Vorlesung_7___9/nlindata.mat">`nlindata.mat`</a> and save them to the folder of this notebook.
 These datasets are borrowed from Philipp Hennig's course <a href="https://uni-tuebingen.de/en/180804">"Probabilistic machine learning"</a>, given at the University of Tübingen.</p>
-<p>The following code cell loads inputs, outputs, and precision parameter from <code>lindata.mat</code> and plots the feature vector</p>
+<p>The following code cell loads inputs, outputs, and the precision parameter from <code>lindata.mat</code> and plots the feature vector</p>
 $$
 \boldsymbol{\phi}(x)^{\mathsf{T}} = [1, x].
 $$
@@ -13284,7 +13284,7 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Next we plot samples from and credibility regions of the predictive distribution.</p>
+<p>Next, we plot samples from and credibility regions of the predictive distribution.</p>
 
 </div>
 </div>
@@ -13604,7 +13604,7 @@ Do you think the model performs well on this data?</p>
 $$
 \boldsymbol{\phi}(x)^{\mathsf{T}} = [1, x, x^2].
 $$<p>Change the code accordingly and run it.</p>
-<p><em>Hint:</em> Only a very minor modification in the code is required to accommodate for this change.</p>
+<p><em>Hint:</em> Only a very minor modification in the code is required to accommodate this change.</p>
 
 </div>
 </div>
@@ -13779,10 +13779,10 @@ h(x) = \begin{cases}
 0, \qquad x &lt; 0,
 \end{cases}
 $$<p>as features and change the code accordingly.
-Place in total 9 of these features with two steps apart between $x = -8$ and $x = 8$.
+Place a total of 9 of these features, with the steps two units apart, between $x = -8$ and $x = 8$.
 The feature vector is then</p>
 $$
-\boldsymbol{\phi}(x)^{\mathsf{T}} = [h(x-8), h(x - 6), \ldots, h(x + 8)].
+\boldsymbol{\phi}(x)^{\mathsf{T}} = [h(x - 8), h(x - 6), \ldots, h(x + 8)].
 $$
 </div>
 </div>
@@ -14126,7 +14126,7 @@ Refer to Exercise 2.12(a) for the expression of the marginal likelihood of the B
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="(a)">(a)<a class="anchor-link" href="#(a)">¶</a></h3><p>Extend the code to also compute the logarithm of the marginal likelihood.
-Which one of the three feature vectors in Exercise 3.2 gives the largest log marginal likelihood on the data <code>nlindata.mat</code>?</p>
+Which one of the four feature vectors in Exercise 3.2 gives the largest log marginal likelihood on the data <code>nlindata.mat</code>?</p>
 
 </div>
 </div>
@@ -14184,7 +14184,7 @@ Which one of the three feature vectors in Exercise 3.2 gives the largest log mar
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Linear (3.2 (a)):</span><span class="se">\t\t</span><span class="si">{:8.1f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">marginal_loglik</span><span class="p">(</span><span class="n">m0</span><span class="p">,</span> <span class="n">S0</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">Phi</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)))</span>
 
 <span class="c1"># Feature vector and prior used in 3.2 (b)</span>
-<span class="k">def</span> <span class="nf">Phi</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>  <span class="c1"># Phi(a) = [1, a]</span>
+<span class="k">def</span> <span class="nf">Phi</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>  <span class="c1"># Phi(a) = [1, a, a**2]</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 <span class="n">D</span> <span class="o">=</span> <span class="n">Phi</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">size</span>  <span class="c1"># number of features</span>
 <span class="n">m0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
@@ -14283,7 +14283,7 @@ Hence we see that the marginal likelihood also penalizes model complexity.</p>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Linear (3.2 (a)):</span><span class="se">\t\t</span><span class="si">{:8.1f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">marginal_loglik</span><span class="p">(</span><span class="n">m0</span><span class="p">,</span> <span class="n">S0</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">Phi</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)))</span>
 
 <span class="c1"># Feature vector and prior used in 3.2 (b)</span>
-<span class="k">def</span> <span class="nf">Phi</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>  <span class="c1"># Phi(a) = [1, a]</span>
+<span class="k">def</span> <span class="nf">Phi</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>  <span class="c1"># Phi(a) = [1, a, a**2]</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 <span class="n">D</span> <span class="o">=</span> <span class="n">Phi</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">size</span>  <span class="c1"># number of features</span>
 <span class="n">m0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
@@ -14352,8 +14352,8 @@ Piecewise linear (3.2 (d)):	   -62.5
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Exercise-3.4-Challenge-Problem:-From-weights-to-functions">Exercise 3.4 Challenge Problem: From weights to functions<a class="anchor-link" href="#Exercise-3.4-Challenge-Problem:-From-weights-to-functions">¶</a></h2><p>In the previous exercises, we described a random function through Gaussian weights. Can we make the same predictions by working directly with the function values? We will first recover the quadratic model this way, then use the new representation to go beyond a finite feature vector.</p>
-<p>Use <code>nlindata.mat</code> and the zero mean weight prior below.</p>
+<h2 id="Exercise-3.4:-Challenge-Problem:-From-weights-to-functions">Exercise 3.4: Challenge Problem: From weights to functions<a class="anchor-link" href="#Exercise-3.4:-Challenge-Problem:-From-weights-to-functions">¶</a></h2><p>In the previous exercises, we described a random function through Gaussian weights. Can we make the same predictions by working directly with the function values? We will first recover the quadratic model this way, then use the new representation to go beyond a finite feature vector.</p>
+<p>Use <code>nlindata.mat</code> and the zero-mean weight prior below.</p>
 
 </div>
 </div>
@@ -14403,7 +14403,7 @@ f(x_{g,M})
 \mathbf w,
 \qquad \mathbf w\sim\mathcal N(\mathbf 0,\mathbf S_0).
 $$<p>One draw of $\mathbf f_g\in\mathbb R^M$ gives $M$ values from one random curve. They depend on the same weights and are generally dependent.</p>
-<p>Find the distribution of $\mathbf f_g$, including its mean and covariance. Write its covariance entries as $k(x,x')=\operatorname{Cov}(f(x),f(x'))$ and complete <code>k_quadratic</code>. For arrays <code>a</code> and <code>b</code>, this function should return the matrix with entries $k(a_i,b_j)$.</p>
+<p>Find the distribution of $\mathbf f_g$, including its mean and covariance. Write its covariance entries as $k(x,x')=\operatorname{Cov}(f(x),f(x'))$ and complete <code>k_quadratic</code>. For arrays <code>a</code> and <code>b</code>, this function should return the matrix with entries $k(a_i, b_j)$.</p>
 <p>Compare the two sampling procedures below. The right panel samples a vector with 120 entries without sampling any weights. Why do its entries still trace out a quadratic curve?</p>
 
 </div>
@@ -14619,7 +14619,7 @@ $$<p>the conditional covariance is $\boldsymbol\Sigma_{11}-\boldsymbol\Sigma_{12
 <h3 id="(c)-Choose-a-covariance-without-constructing-its-features">(c) Choose a covariance without constructing its features<a class="anchor-link" href="#(c)-Choose-a-covariance-without-constructing-its-features">¶</a></h3><p>The Gaussian kernel, also called the RBF or squared exponential kernel, is</p>
 $$
 k_{\mathrm{RBF}}(x,x')=\theta\exp\!\left(-\frac{(x-x')^2}{2\ell^2}\right).
-$$<p>Here $\theta$ is the prior variance at each input and $\ell$ sets the distance over which function values are strongly correlated. This kernel admits an infinite dimensional feature representation. You may take this fact as given. Explain why part (b) still lets us compute its predictions.</p>
+$$<p>Here $\theta$ is the prior variance at each input and $\ell$ sets the distance over which function values are strongly correlated. This kernel admits an infinite-dimensional feature representation. You may take this fact as given. Explain why part (b) still lets us compute its predictions.</p>
 <p>Implement <code>k_rbf</code> and compare its predictions with the quadratic model over the wider interval below. Far from all training inputs, what happens to $k(x_\star,x_i)$ and $k(x_\star,x_\star)$ for the RBF kernel? Use the predictive formulas to explain the mean and uncertainty you see. Why does the quadratic model behave differently?</p>
 
 </div>
