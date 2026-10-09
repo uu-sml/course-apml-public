@@ -13209,9 +13209,11 @@ $$<p>where $N$ is the number of dimensions in the latent space. $\mu_\phi$ and $
 <div class="inner_cell">
     <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">kl_std_normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">):</span>
-    <span class="c1"># mu and log_var are the outputs of the encoder network</span>
-    <span class="c1"># KL(N(mu, diag(sigma^2)) || N(0, I))</span>
-    <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">logvar</span> <span class="o">-</span> <span class="n">mu</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">logvar</span><span class="o">.</span><span class="n">exp</span><span class="p">(),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># mu and logvar are the outputs of the encoder network, shape (batch_size, latent_dim)</span>
+    <span class="c1"># returns KL(N(mu, diag(sigma^2)) || N(0, I)) for every data point, shape (batch_size,)</span>
+    <span class="n">kl</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="n">kl</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">logvar</span> <span class="o">-</span> <span class="n">mu</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">logvar</span><span class="o">.</span><span class="n">exp</span><span class="p">(),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">kl</span>
 </pre></div>
 
     </div>
@@ -13240,10 +13242,13 @@ $$<p>where $N$ is the number of dimensions in the latent space. $\mu_\phi$ and $
 <div class="inner_cell">
     <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">reparameterize</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">):</span>
+    <span class="c1"># sample z ~ N(mu, diag(exp(logvar))) with the reparameterization trick</span>
     <span class="c1"># z = mu + sigma * eps, eps ~ N(0, I)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="o">...</span>
     <span class="n">std</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">logvar</span><span class="p">)</span>
     <span class="n">eps</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">std</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">mu</span> <span class="o">+</span> <span class="n">std</span> <span class="o">*</span> <span class="n">eps</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">+</span> <span class="n">std</span> <span class="o">*</span> <span class="n">eps</span>
+    <span class="k">return</span> <span class="n">z</span>
 </pre></div>
 
     </div>
@@ -13265,6 +13270,17 @@ $$<p>where $N$ is the number of dimensions in the latent space. $\mu_\phi$ and $
 <div class="inner_cell">
     <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">elbo_loss</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+    <span class="c1"># encode x, sample z with the reparameterization trick and decode z</span>
+    <span class="n">x_hat</span> <span class="o">=</span> <span class="o">...</span>
+
+    <span class="c1"># Reconstruction loss (L1 error summed over the data dimensions), shape (batch_size,)</span>
+    <span class="n">recon_loss</span> <span class="o">=</span> <span class="o">...</span>
+
+    <span class="c1"># KL divergence loss, shape (batch_size,)</span>
+    <span class="n">kl_loss</span> <span class="o">=</span> <span class="o">...</span>
+
+    <span class="c1"># negative ELBO averaged over the mini-batch</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="o">...</span>
     <span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">reparameterize</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">)</span>
     <span class="n">x_hat</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
@@ -13471,8 +13487,11 @@ Epoch: 200 | loss: 0.5547 | recon 0.2217 | kl 3.3299
     <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">vae_sampling</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">2000</span><span class="p">):</span>
+    <span class="c1"># sample n_samples latent variables from the prior p(z) and decode them</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="o">...</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">vae</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="n">vae</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">samples</span>
 
 <span class="n">samples</span> <span class="o">=</span> <span class="n">vae_sampling</span><span class="p">()</span>
 <span class="n">plot_moons</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Sampled data from noise"</span><span class="p">)</span>
